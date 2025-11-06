@@ -7,19 +7,16 @@ async function getApiGitHub() {
 
     try {
 
-        // Fazer uma requisição do tipo GET para a API do GitHub
-        const dadosPerfil = await fetch('https://api.github.com/users/patriciaeliseupge');
+        // PASSO 01: Fazer uma requisição do tipo GET para a API do GitHub
+        const dadosPerfil = await fetch('https://api.github.com/users/patriciaEliseu');
 
         // Passo 02: Criar o HTML / CSS com os dados do Perfil
-        // vou pegar todo o conteudo menos a cessão.
-
-
-        let conteudo = await dadosPerfil.json();
-
-        let conteudo = 
+        let perfilJson = await dadosPerfil.json();
+        
+        // PASSO 03: Criar o HTML/CSS com os dados do perfil.
 
         let conteudo = `
-       
+   
             <!-- FOTO DO PERFIL -->
             <figure class="about_image">
                 <img
@@ -31,8 +28,8 @@ async function getApiGitHub() {
             <article class="about_content">
  
                 <h2>Sobre mim</h2>
-                <p>Mussum Ipsum, cacilds vidis litro abertis.  Não sou faixa preta cumpadi, sou preto inteiris, inteiris. Per aumento de cachacis, eu reclamis. Nec orci ornare consequat. Praesent lacinia ultrices consectetur. Sed non ipsum felis. Nulla id gravida magna, ut semper sapien.</p>
-                <p>Mussum Ipsum, cacilds vidis litro abertis.  Não sou faixa preta cumpadi, sou preto inteiris, inteiris. Per aumento de cachacis, eu reclamis. Nec orci ornare consequat. Praesent lacinia ultrices consectetur. Sed non ipsum felis. Nulla id gravida magna, ut semper sapien.</p>
+                <p>Sou Patricia Gonçalves Eliseu, uma desenvolvedora full stack apaixonada por criar soluções digitais inovadoras. Com experiência em diversas tecnologias, estou sempre em busca de novos desafios para aprimorar minhas habilidades e contribuir para projetos impactantes.</p>
+                <p>Minha missão é transformar ideias em realidade através do código, entregando produtos de alta qualidade que atendam às necessidades dos usuários.</p>
  
                 <div class="about_stats">
                     <a href="${perfilJson.html_url}" target="_blank" class="botao">Ver GitHub</a>
@@ -57,7 +54,8 @@ async function getApiGitHub() {
 
  
 
-        // Passo 04: 
+        // Passo 04: Adicionar o HTML dentro da seção About 
+        about.innerHTML += conteudo;
 
 }catch (error) {
         console.error(error);
