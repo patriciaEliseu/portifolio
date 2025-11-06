@@ -21,7 +21,7 @@ async function getApiGitHub() {
             <figure class="about_image">
                 <img
                     src="${perfilJson.avatar_url}"
-                    alt="Foto do perfil do GitHub - ${perfilJson.name}."
+                    alt="Foto do perfil do GitHub -"${perfilJson.name}."
                 >
             </figure> 
             <!-- CONTEÚDO DO PERFIL -->
@@ -51,9 +51,6 @@ async function getApiGitHub() {
  
         `;
  
-
- 
-
         // Passo 04: Adicionar o HTML dentro da seção About 
         about.innerHTML += conteudo;
 
