@@ -1,6 +1,12 @@
 // Selecionar a Seçaõ About
-
 const about = document.querySelector('#about');
+
+// Selecionar o formulário de contato
+const formulario = document.querySelector('#formulario');
+
+// Expressão regular para validar o email
+const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+ 
 
 // Função para buscar os dados no GitHub
 async function getApiGitHub() {
@@ -11,7 +17,7 @@ async function getApiGitHub() {
         const dadosPerfil = await fetch('https://api.github.com/users/patriciaEliseu');
 
         // Passo 02: Criar o HTML / CSS com os dados do Perfil
-        let perfilJson = await dadosPerfil.json();
+        const perfilJson = await dadosPerfil.json();
         
         // PASSO 03: Criar o HTML/CSS com os dados do perfil.
 
@@ -54,10 +60,65 @@ async function getApiGitHub() {
         // Passo 04: Adicionar o HTML dentro da seção About 
         about.innerHTML += conteudo;
 
-}catch (error) {
+    }catch (error) {
         console.error(error);
     }
 }
+
+    //Função de envio e validação do formulário de contato
+    formulario.addEventListener('submit', function(event) {
+        // Impedir o envio automático do formulário
+        event.preventDefault();
+
+        // Validação do campo nome
+        const campoNome = document.querySelector('#nome');
+        const txtNome = document.querySelector('#txtNome');
+
+        // Nome precisa ter no mínimo 3 caracteres
+        if (campoNome.value.length < 3) {
+            txtNome.innerHTML = 'O Nome deve ter no minímo 3 caracteres.';
+            campoNome.focus();
+            return;
+            
+        } else {
+            txtNome.innerHTML = '';
+        }
+
+        // Validação do campo email
+        const campEmail = document.querySelector('#email');
+        const txtEmail = document.querySelector('#txtEmail');
+
+        // Validar se o email é válido
+        if (!campEmail.value.match(emailRegex)) {
+            txtEmail.innerHTML = 'Digite um e-mail válido.';
+            campoEmail.focus();
+            return;
+            
+        } else {
+            txtEmail.innerHTML = '';
+        }
+
+ 
+
+  // validar o campo assunto
+    const campoAssunto = document.querySelector('#assunto');
+    const txtAssunto = document.querySelector('#txtAssunto');
+
+    // Assunto deve ter no mínimo 5 caracteres
+    if (campoAssunto.value.length < 5) {
+        txtAssunto.innerHTML = 'O Assunto deve ter no minímo 5 caracteres.';
+        campoAssunto.focus();
+        return;
+        
+    } else {
+        txtAssunto.innerHTML = '';
+    }
+
+    // Se passou por todas as validações, enviar o formulário
+    formulario.submit();
+
+})
+
 
 // Chamar a função para buscar os dados do GitHub
 getApiGitHub();
